@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper'
+require File.expand_path('../test_helper', __FILE__)
 
 class Twurl::ConfigurationController::DispatchTest < Test::Unit::TestCase
   def test_error_message_is_displayed_if_setting_is_unrecognized

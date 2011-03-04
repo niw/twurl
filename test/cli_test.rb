@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper'
+require File.expand_path('../test_helper', __FILE__)
 
 class Twurl::CLI::OptionParsingTest < Test::Unit::TestCase
   module CommandParsingTests

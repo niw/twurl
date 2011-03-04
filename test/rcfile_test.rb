@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/test_helper'
+require File.expand_path('../test_helper', __FILE__)
 
 class Twurl::RCFile::PathConstructionTest < Test::Unit::TestCase
   def test_file_path_appends_file_to_directory

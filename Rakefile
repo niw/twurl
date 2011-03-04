@@ -3,7 +3,7 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/gempackagetask'
 
-require File.dirname(__FILE__) + '/lib/twurl'
+require File.expand_path('../lib/twurl', __FILE__)
 
 library_root = File.dirname(__FILE__)
 
