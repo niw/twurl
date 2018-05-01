@@ -45,6 +45,7 @@ module Twurl
 
         Twurl.options         = Options.new
         Twurl.options.trace   = false
+        Twurl.options.json    = nil
         Twurl.options.data    = {}
         Twurl.options.headers = {}
         Twurl.options.upload  = {}
@@ -75,6 +76,7 @@ Supported Commands: #{SUPPORTED_COMMANDS.sort.join(', ')}
 
           o.section "Common options:" do
             trace
+            json
             data
             raw_data
             headers
@@ -228,6 +230,12 @@ Supported Commands: #{SUPPORTED_COMMANDS.sort.join(', ')}
         end
       end
 
+      def json
+        on('-j', '--json [json]', 'Sends the specified JSON in a POST request to the HTTP server.') do |json|
+          options.json = json || STDIN.read
+        end
+      end
+
       def data
         on('-d', '--data [data]', 'Sends the specified data in a POST request to the HTTP server.') do |data|
           data.split('&').each do |pair|
@@ -351,7 +359,7 @@ Supported Commands: #{SUPPORTED_COMMANDS.sort.join(', ')}
     end
 
     def request_method
-      super || (data.empty? ? DEFAULT_REQUEST_METHOD : 'post')
+      super || (json || !data.empty? ? "post" : DEFAULT_REQUEST_METHOD)
     end
 
     def protocol

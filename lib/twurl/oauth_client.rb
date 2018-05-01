@@ -76,7 +76,10 @@ module Twurl
       request_class = METHODS.fetch(options.request_method.to_sym)
       request = request_class.new(options.path, options.headers)
 
-      if options.upload && options.upload['file'].count > 0
+      if options.json
+        request.body = options.json
+        request.content_type = "application/json; charset=utf-8"
+      elsif options.upload && options.upload['file'].count > 0
         boundary = "00Twurl" + rand(1000000000000000000).to_s + "lruwT99"
         multipart_body = []
         file_field = options.upload['filefield'] ? options.upload['filefield'] : 'media[]'
